@@ -118,9 +118,19 @@ void cargarDatosViaje(viajes *viaje) {
     // creo el arreglo dinamico
     viaje->listHabRes = (int *)malloc(viaje->cantHabRes * sizeof(int));
     // igreso los numeros de habitaciones
+    int duplicado = 0;
     for (size_t i = 0; i < viaje->cantHabRes; i++) {
         printf("Ingrese el numero de la %d habitacion a reservar: \n", i + 1);
         scanf("%d", &viaje->listHabRes[i]);
+        for (int j = 0; j < i; j++)
+        {
+            if(viaje->listHabRes[j] == viaje->listHabRes[i]){
+                printf("Este numero de habitacion ya fue ingresado. Ingrese otro.\n");
+                i--; // para repetir la iteración actual y permitir que se ingrese otro número.
+                break;
+            }
+        }
+        
     }
 }
 
